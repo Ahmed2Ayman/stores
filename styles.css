@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+}
+.container {
+  background: url("images/meetings-bg.jpg");
+  width: 100%;
+  height: 35.8em;
+}
+.daily-container {
+  width: 15em;
+  height: 15em;
+  background: url("images/service-item-bg.jpg");
+  position: relative;
+  top: 100px;
+  left: 200px;
+}
+.daily-usage-button {
+  text-decoration: none;
+  font-size: 25px;
+  color: #fff;
+  background-color: #f5a425;
+  border-radius: 0.7em;
+  position: absolute;
+  right: 1em;
+  bottom: 1em;
+  padding: 0.5em;
+}
+.daily-usage-title {
+  color: #fff;
+  text-align: center;
+}
