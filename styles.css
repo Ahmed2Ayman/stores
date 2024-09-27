@@ -1,26 +1,27 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Make sure padding and borders are included in the element's width/height */
+  box-sizing: border-box; /* Ensure padding and borders are included in element sizes */
 }
 
-/* Container that will adjust based on the viewport height */
+/* Main container that will adjust based on the viewport */
 .container {
   background: url("images/meetings-bg.jpg") no-repeat center center/cover;
   width: 100%;
   height: 100vh; /* Full viewport height */
 }
 
-/* Daily container with flexible width and height */
+/* Daily container with flexible size */
 .daily-container {
-  width: 30vw; /* Use percentage of the viewport width */
-  height: 30vh; /* Use percentage of the viewport height */
+  width: 20vw; /* 20% of the viewport width */
+  height: 20vw; /* Keep it square by setting height equal to width */
   background: url("images/service-item-bg.jpg") no-repeat center center/cover;
   position: relative;
-  margin: 5vh 10vw; /* Responsive spacing */
+  top: 10vh; /* Adjusted to 10% of the viewport height for responsiveness */
+  left: 10vw; /* Adjusted to 10% of the viewport width for responsiveness */
 }
 
-/* Button with relative size and positioning */
+/* Button with relative positioning and sizing */
 .daily-usage-button {
   text-decoration: none;
   font-size: 1.5vw; /* Responsive font size */
@@ -33,45 +34,45 @@
   padding: 0.5em 1em;
 }
 
-/* Title styling */
+/* Title styling with responsive font size */
 .daily-usage-title {
   color: #fff;
   text-align: center;
   font-size: 2vw; /* Responsive font size */
 }
 
-/* Responsive adjustments for smaller screens */
+/* Responsive adjustments for tablet screens (768px or less) */
 @media (max-width: 768px) {
   .daily-container {
-    width: 80vw; /* Expand width on smaller screens */
-    height: 40vh;
-    margin: 3vh auto;
+    width: 40vw; /* Larger width for smaller screens */
+    height: 40vw;
+    top: 5vh;
+    left: 5vw;
   }
 
   .daily-usage-button {
-    font-size: 3.5vw; /* Adjust font size */
-    right: 0.5em;
-    bottom: 0.5em;
+    font-size: 3vw; /* Larger font size */
   }
 
   .daily-usage-title {
-    font-size: 4vw; /* Adjust font size */
+    font-size: 4vw; /* Larger font size */
   }
 }
 
-/* Further adjustments for very small screens */
+/* Responsive adjustments for mobile screens (480px or less) */
 @media (max-width: 480px) {
   .daily-container {
-    width: 90vw;
-    height: 50vh;
-    margin: 2vh auto;
+    width: 80vw; /* Even larger for smaller mobile screens */
+    height: 80vw;
+    top: 3vh;
+    left: 5vw;
   }
 
   .daily-usage-button {
-    font-size: 4.5vw;
+    font-size: 4vw;
   }
 
   .daily-usage-title {
-    font-size: 4.5vw;
+    font-size: 5vw;
   }
 }
