@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
@@ -22,3 +23,29 @@ td {
   padding: 10px;
   text-align: center;
 }
+=======
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+input,
+button {
+  padding: 10px;
+  margin: 10px;
+}
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+table,
+th,
+td {
+  border: 1px solid black;
+}
+th,
+td {
+  padding: 10px;
+  text-align: center;
+}
+>>>>>>> 92f5409 (first commit)
