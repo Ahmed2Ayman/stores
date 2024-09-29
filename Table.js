@@ -1,80 +1,111 @@
-let totalQuantity = 100; // إجمالي الكمية المتاحة في المخزن
-
+// استهلاك المنتج وإضافته إلى الجدول
 function consumeProduct() {
   const playerName = document.getElementById("playerName").value;
   const consumedWheat = document.getElementById("consumedWheat").value;
   const consumedWood = document.getElementById("consumedWood").value;
   const reason = document.getElementById("reason").value;
 
-  // Create a data object
-  const data = {
-    playerName: playerName,
-    consumedWheat: consumedWheat,
-    consumedWood: consumedWood,
-    reason: reason,
+  // تأكيد وجود البيانات
+  if (!playerName || !consumedWheat || !consumedWood || !reason) {
+    alert("يرجى إدخال جميع البيانات");
+    return;
+  }
+
+  // إنشاء كائن المنتج
+  const product = {
+    playerName,
+    consumedWheat,
+    consumedWood,
+    reason,
   };
 
-  // Get existing data from localStorage, or initialize to an empty array
+  // الحصول على البيانات من localStorage أو إنشاء قائمة فارغة
   let consumedProducts =
     JSON.parse(localStorage.getItem("consumedProducts")) || [];
 
-  // Add new data to the array
-  consumedProducts.push(data);
+  // إضافة المنتج الجديد إلى القائمة
+  consumedProducts.push(product);
 
-  // Save updated array back to localStorage
+  // حفظ القائمة المحدثة في localStorage
   localStorage.setItem("consumedProducts", JSON.stringify(consumedProducts));
 
-  // Create a new row in the table
-  addRowToTable(data, consumedProducts.length - 1);
+  // إضافة المنتج إلى الجدول
+  addRowToTable(product, consumedProducts.length - 1);
 
-  // Clear the form inputs after submission
+  // إعادة تعيين الحقول بعد الإضافة
   document.getElementById("playerName").value = "";
   document.getElementById("consumedWheat").value = "";
   document.getElementById("consumedWood").value = "";
   document.getElementById("reason").value = "";
 }
 
-// Function to load the stored data when the page loads
-function loadStoredData() {
-  const consumedProducts =
-    JSON.parse(localStorage.getItem("consumedProducts")) || [];
-
-  consumedProducts.forEach((item, index) => {
-    addRowToTable(item, index);
-  });
-}
-
-// Function to add a row to the table
-function addRowToTable(data, index) {
+// وظيفة لإضافة صف إلى الجدول
+function addRowToTable(product, index) {
   const row = document.createElement("tr");
   row.innerHTML = `
-    <td>${data.playerName}</td>
-    <td>${data.consumedWheat}</td>
-    <td>${data.consumedWood}</td>
-    <td>${data.reason}</td>
-    <td><button onclick="removeProduct(${index})">Delete</button></td>
+    <td>${product.playerName}</td>
+    <td>${product.consumedWheat}</td>
+    <td>${product.consumedWood}</td>
+    <td>${product.reason}</td>
+    <td><button onclick="removeProduct(${index})">حذف</button></td>
   `;
   document.getElementById("consumedList").appendChild(row);
 }
 
-// Function to remove the row and data from localStorage
+// وظيفة لإزالة المنتج من الجدول ومن localStorage
 function removeProduct(index) {
-  // Get the current stored data
+  // الحصول على البيانات من localStorage
   let consumedProducts =
     JSON.parse(localStorage.getItem("consumedProducts")) || [];
 
-  // Remove the selected product
+  // إزالة المنتج من القائمة
   consumedProducts.splice(index, 1);
 
-  // Update the localStorage with the new array
+  // حفظ القائمة المحدثة في localStorage
   localStorage.setItem("consumedProducts", JSON.stringify(consumedProducts));
 
-  // Clear the current table
-  document.getElementById("consumedList").innerHTML = "";
-
-  // Reload the table with updated data
+  // إعادة تحميل الجدول بعد حذف المنتج
   loadStoredData();
 }
 
-// Call the load function when the page is loaded
+// وظيفة لتحميل البيانات المحفوظة من localStorage عند تحميل الصفحة
+function loadStoredData() {
+  // الحصول على المنتجات من localStorage
+  let consumedProducts =
+    JSON.parse(localStorage.getItem("consumedProducts")) || [];
+
+  // إفراغ الجدول قبل إعادة تحميل البيانات
+  document.getElementById("consumedList").innerHTML = "";
+
+  // إضافة كل منتج محفوظ إلى الجدول
+  consumedProducts.forEach((product, index) => {
+    addRowToTable(product, index);
+  });
+}
+
+// طباعة الجدول كملف PDF باستخدام مكتبة html2pdf
+function printPdf() {
+  // إخفاء أزرار الحذف مؤقتًا
+  const deleteButtons = document.querySelectorAll("td button");
+  deleteButtons.forEach((button) => {
+    button.style.display = "none";
+  });
+
+  // طباعة الجدول كـ PDF
+  const element = document.getElementById("consumptionTable");
+  html2pdf(element, {
+    margin: 1,
+    filename: "consumption_table.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+  }).then(() => {
+    // إظهار أزرار الحذف بعد الطباعة
+    deleteButtons.forEach((button) => {
+      button.style.display = "inline-block";
+    });
+  });
+}
+
+// تحميل البيانات عند بدء الصفحة
 window.onload = loadStoredData;

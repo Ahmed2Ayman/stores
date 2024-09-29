@@ -5,27 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>حساب الاستهلاك</title>
     <link rel="stylesheet" href="Table Style.css" />
+    <!-- تضمين مكتبة jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- تضمين مكتبة html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
   </head>
   <body>
-    <h2>استهلاك يومى</h2>
+    <h2>استهلاك يومي</h2>
 
-    <label for="playerName">اسم القلعه: </label>
+    <label for="playerName">اسم القلعة: </label>
     <input type="text" id="playerName" /><br />
 
-    <label for="consumedWheat"> القمح المستهلك: </label>
+    <label for="consumedWheat">القمح المستهلك: </label>
     <input type="number" id="consumedWheat" /><br />
-    <label for="consumedWood"> الخشب المستهلك: </label>
+
+    <label for="consumedWood">الخشب المستهلك: </label>
     <input type="number" id="consumedWood" /><br />
-    <label for="reason"> سبب السحب : </label>
+
+    <label for="reason">سبب السحب: </label>
     <input type="text" id="reason" /><br />
 
     <button onclick="consumeProduct()">أضف الاستهلاك</button>
 
     <h3>المنتجات المستهلكة:</h3>
-    <table>
+    <table id="consumptionTable" border="1">
       <thead>
         <tr>
-          <th>اسم القلعه</th>
+          <th>اسم القلعة</th>
           <th>القمح المستهلك</th>
           <th>الخشب المستهلك</th>
           <th>سبب السحب</th>
@@ -36,6 +42,10 @@
       </tbody>
     </table>
 
+    <!-- زر لتحميل الجدول كـ PDF -->
+    <button onclick="printPdf()">طباعة كـ PDF</button>
+
+    <!-- ربط ملف JavaScript -->
     <script src="Table.js"></script>
   </body>
 </html>

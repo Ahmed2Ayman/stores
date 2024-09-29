@@ -1,24 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap");
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Amiri", Arial, sans-serif; /* استخدام خط Amiri للغة العربية */
   margin: 20px;
+  direction: rtl; /* دعم الاتجاه من اليمين إلى اليسار للغة العربية */
+  text-align: right;
+  background-color: #f9f9f9;
 }
+
 input,
 button {
   padding: 10px;
   margin: 10px;
+  font-size: 16px;
+  border-radius: 5px; /* تحسين الزوايا */
+  border: 1px solid #ccc;
 }
+
+button {
+  background-color: #28a745; /* لون زر مميز */
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
 table {
   width: 100%;
   margin-top: 20px;
   border-collapse: collapse;
+  background-color: white;
 }
+
 table,
 th,
 td {
   border: 1px solid black;
 }
+
 th,
 td {
   padding: 10px;
   text-align: center;
+}
+
+th {
+  background-color: #007bff; /* لون خلفية للرؤوس */
+  color: white;
+}
+
+td button {
+  background-color: #dc3545; /* لون زر الحذف */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+td button:hover {
+  background-color: #c82333;
 }
